@@ -12,10 +12,11 @@ class ViewController: UITableViewController {
     
     let cellID = "cellID"
     
-    let nameDimensionalArray = [
-        ["Adam", "Bill", "Jill", "Lisa", "Bart" ],
-        [ "Carl", "Lenny", "Moe", "Homer" ],
-        [ "Stan", "Kenny", "Kyle", "Cartman" ]
+    var nameDimensionalArray = [
+        
+        ExpandableNames(isExpanded: true, names: ["Adam", "Bill", "Jill", "Lisa", "Bart" ]),
+        ExpandableNames(isExpanded: true, names: [ "Carl", "Lenny", "Moe", "Homer" ]),
+        ExpandableNames(isExpanded: true, names: [ "Stan", "Kenny", "Kyle", "Cartman" ]),
     ]
     
     var showIndexPaths = false
@@ -27,7 +28,7 @@ class ViewController: UITableViewController {
         var indexPathsToReload = [IndexPath]()
         
         for section in nameDimensionalArray.indices {
-            for row in nameDimensionalArray[section].indices {
+            for row in nameDimensionalArray[section].names.indices {
                         print(section, row)
                 let indexPath = IndexPath(row: row, section: section)
                 indexPathsToReload.append(indexPath)
@@ -61,10 +62,47 @@ extension ViewController {
     
     // Create label for sections
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Section"
-        label.backgroundColor = UIColor.lightGray
-        return label
+        
+        let button = UIButton(type: .system)
+        button.setTitle("Close", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .yellow
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        
+        button.tag = section
+        
+        return button
+    }
+    
+    @objc func handleExpandClose(button: UIButton) {
+        print("Trying to expand and close section...")
+        
+        let section = button.tag
+        
+        // Close section by deleteing rows
+        var indexPaths = [IndexPath]()
+        for row in nameDimensionalArray[section].names.indices {
+            print(0, row)
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = nameDimensionalArray[section].isExpanded
+        nameDimensionalArray[section].isExpanded = !isExpanded
+        
+        button.setTitle(isExpanded ? "Open" : "Close", for: .normal)
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
+    }
+    
+     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 36
     }
     
    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,14 +110,17 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameDimensionalArray[section].count
+        if !nameDimensionalArray[section].isExpanded {
+            return 0
+        }
+        return nameDimensionalArray[section].names.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        let name = nameDimensionalArray[indexPath.section][indexPath.row]
+        let name = nameDimensionalArray[indexPath.section].names[indexPath.row]
         
         cell.textLabel?.text = name
         
