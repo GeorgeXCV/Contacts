@@ -17,9 +17,35 @@ class ViewController: UITableViewController {
         [ "Carl", "Lenny", "Moe", "Homer" ],
         [ "Stan", "Kenny", "Kyle", "Cartman" ]
     ]
+    
+    var showIndexPaths = false
+    
+    @objc func handleShowIndexPath() {
+        print("Attemping reload animation of indexPaths...")
+        
+        // Build indexPaths we want to reload
+        var indexPathsToReload = [IndexPath]()
+        
+        for section in nameDimensionalArray.indices {
+            for row in nameDimensionalArray[section].indices {
+                        print(section, row)
+                let indexPath = IndexPath(row: row, section: section)
+                indexPathsToReload.append(indexPath)
+            }
+        }
+        
+        showIndexPaths = !showIndexPaths
+        
+        let animationStyle = showIndexPaths ? UITableView.RowAnimation.right : .left
+        
+        tableView.reloadRows(at: indexPathsToReload, with: animationStyle)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add Button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show IndexPath", style: .plain, target: self, action: #selector(handleShowIndexPath))
        
         // Set Title
         navigationItem.title = "Contacts"
@@ -46,9 +72,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return nameDimensionalArray[section].count
-
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,12 +83,11 @@ extension ViewController {
         
         cell.textLabel?.text = name
         
-        cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row: \(indexPath.row)"
-        
+        if showIndexPaths{
+              cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row: \(indexPath.row)"
+        }
         return cell
         
     }
-    
-  
 }
 
