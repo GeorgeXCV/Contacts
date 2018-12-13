@@ -16,11 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Create new Window and set it to appear in VC
+        // Create new Window
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        window?.rootViewController = ViewController()
+        // Create Navigation Controller and add it to VC
+        let navController = UINavigationController(rootViewController: ViewController())
+        
+        // Add window inside navController
+        window?.rootViewController = navController
         
         
         return true
