@@ -13,6 +13,7 @@
 		5E51271621C2BB8F006B69D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E51271521C2BB8F006B69D0 /* Assets.xcassets */; };
 		5E51271921C2BB8F006B69D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E51271721C2BB8F006B69D0 /* LaunchScreen.storyboard */; };
 		5E51272121C2D184006B69D0 /* ExpandableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51272021C2D184006B69D0 /* ExpandableNames.swift */; };
+		5E51272321C2DB62006B69D0 /* ContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51272221C2DB62006B69D0 /* ContactsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		5E51271821C2BB8F006B69D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E51271A21C2BB8F006B69D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E51272021C2D184006B69D0 /* ExpandableNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNames.swift; sourceTree = "<group>"; };
+		5E51272221C2DB62006B69D0 /* ContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				5E51270E21C2BB8E006B69D0 /* AppDelegate.swift */,
 				5E51271021C2BB8E006B69D0 /* ViewController.swift */,
 				5E51272021C2D184006B69D0 /* ExpandableNames.swift */,
+				5E51272221C2DB62006B69D0 /* ContactsCell.swift */,
 				5E51271221C2BB8E006B69D0 /* Main.storyboard */,
 				5E51271521C2BB8F006B69D0 /* Assets.xcassets */,
 				5E51271721C2BB8F006B69D0 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E51272321C2DB62006B69D0 /* ContactsCell.swift in Sources */,
 				5E51272121C2D184006B69D0 /* ExpandableNames.swift in Sources */,
 				5E51271121C2BB8E006B69D0 /* ViewController.swift in Sources */,
 				5E51270F21C2BB8E006B69D0 /* AppDelegate.swift in Sources */,

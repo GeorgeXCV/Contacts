@@ -12,11 +12,27 @@ class ViewController: UITableViewController {
     
     let cellID = "cellID"
     
+    func someMethodIWantToCall(cell: UITableViewCell) {
+        
+        // Figure out which name we're clicking on
+        
+        guard let indexPathTapped = tableView.indexPath(for: cell) else { return }
+        
+        let contact = nameDimensionalArray[indexPathTapped.section].names[indexPathTapped.row]
+        print(contact)
+        
+        let hasFavourited = contact.hasFavourited
+        nameDimensionalArray[indexPathTapped.section].names[indexPathTapped.row].hasFavourited = !hasFavourited
+        
+        cell.accessoryView?.tintColor = hasFavourited ? UIColor.lightGray : .red
+    }
+    
     var nameDimensionalArray = [
         
-        ExpandableNames(isExpanded: true, names: ["Adam", "Bill", "Jill", "Lisa", "Bart" ]),
-        ExpandableNames(isExpanded: true, names: [ "Carl", "Lenny", "Moe", "Homer" ]),
-        ExpandableNames(isExpanded: true, names: [ "Stan", "Kenny", "Kyle", "Cartman" ]),
+        ExpandableNames(isExpanded: true, names: ["Adam", "Bill", "Jill", "Lisa", "Bart"].map{ Contact(name: $0, hasFavourited: false) }),
+        ExpandableNames(isExpanded: true, names: [ "Carl", "Lenny", "Moe", "Homer" ].map{ Contact(name: $0, hasFavourited: false) }),
+        ExpandableNames(isExpanded: true, names: [ "Stan", "Kenny", "Kyle", "Cartman" ].map{ Contact(name: $0, hasFavourited: false) }),
+        ExpandableNames(isExpanded: true, names: [Contact(name: "Patrick", hasFavourited: false)]),
     ]
     
     var showIndexPaths = false
@@ -53,7 +69,7 @@ class ViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // Register cell
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(ContactCell.self, forCellReuseIdentifier: cellID)
     
     }
 }
@@ -118,17 +134,20 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ContactCell
+        cell.link = self
         
-        let name = nameDimensionalArray[indexPath.section].names[indexPath.row]
+        let contact = nameDimensionalArray[indexPath.section].names[indexPath.row]
         
-        cell.textLabel?.text = name
+        cell.textLabel?.text = contact.name
         
-        if showIndexPaths{
-              cell.textLabel?.text = "\(name) Section:\(indexPath.section) Row: \(indexPath.row)"
+        cell.accessoryView?.tintColor = contact.hasFavourited ? UIColor.red : .lightGray
+        
+        if showIndexPaths {
+            cell.textLabel?.text = "\(contact.name)   Section:\(indexPath.section) Row:\(indexPath.row)"
         }
-        return cell
         
+        return cell
     }
 }
 
