@@ -1,6 +1,6 @@
 //
 //  ContactsCell.swift
-//  Contacts
+//  ContactsApp
 //
 //  Created by George on 13/12/2018.
 //  Copyright © 2018 George. All rights reserved.
@@ -24,7 +24,6 @@ class ContactCell: UITableViewCell {
         starButton.addTarget(self, action: #selector(handleMarkAsFavourite), for: .touchUpInside)
         
         accessoryView = starButton
-        
     }
     
     @objc private func handleMarkAsFavourite() {
@@ -34,6 +33,4 @@ class ContactCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }

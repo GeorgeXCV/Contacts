@@ -1,21 +1,21 @@
 //
 //  ExpandableNames.swift
-//  Contacts
+//  ContactsApp
 //
 //  Created by George on 13/12/2018.
 //  Copyright © 2018 George. All rights reserved.
 //
 
 import Foundation
+import Contacts
 
 struct ExpandableNames {
-    
     var isExpanded: Bool
-    var names: [Contact]
+    var names: [FavouritableContact]
 }
 
-struct Contact {
-    let name: String
+struct FavouritableContact {
+    let contact: CNContact 
     var hasFavourited: Bool
 }
 

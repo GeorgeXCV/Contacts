@@ -1,12 +1,13 @@
 //
 //  ViewController.swift
-//  Contacts
+//  ContactsApp
 //
 //  Created by George on 13/12/2018.
 //  Copyright © 2018 George. All rights reserved.
 //
 
 import UIKit
+import Contacts
 
 class ViewController: UITableViewController {
     
@@ -27,13 +28,56 @@ class ViewController: UITableViewController {
         cell.accessoryView?.tintColor = hasFavourited ? UIColor.lightGray : .red
     }
     
-    var nameDimensionalArray = [
+    var nameDimensionalArray = [ExpandableNames]()
         
-        ExpandableNames(isExpanded: true, names: ["Adam", "Bill", "Jill", "Lisa", "Bart"].map{ Contact(name: $0, hasFavourited: false) }),
-        ExpandableNames(isExpanded: true, names: [ "Carl", "Lenny", "Moe", "Homer" ].map{ Contact(name: $0, hasFavourited: false) }),
-        ExpandableNames(isExpanded: true, names: [ "Stan", "Kenny", "Kyle", "Cartman" ].map{ Contact(name: $0, hasFavourited: false) }),
-        ExpandableNames(isExpanded: true, names: [Contact(name: "Patrick", hasFavourited: false)]),
-    ]
+//        ExpandableNames(isExpanded: true, names: ["Adam", "Bill", "Jill", "Lisa", "Bart"].map{ FavouriteableContact(name: $0, hasFavourited: false) }),
+//        ExpandableNames(isExpanded: true, names: [ "Carl", "Lenny", "Moe", "Homer" ].map{ FavouriteableContact(name: $0, hasFavourited: false) }),
+//        ExpandableNames(isExpanded: true, names: [ "Stan", "Kenny", "Kyle", "Cartman" ].map{ FavouriteableContact(name: $0, hasFavourited: false) }),
+//        ExpandableNames(isExpanded: true, names: [FavouriteableContact(name: "Patrick", hasFavourited: false)]),
+    
+    
+    private func fetchContacts() {
+          print("Attempting to fetch contacts..")
+        
+        let store = CNContactStore()
+        store.requestAccess(for: .contacts) { (granted, err) in
+            if let err = err {
+                print("Failed to request access", err)
+                return
+            }
+            
+            if granted {
+                print("Access granted")
+                
+                let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
+                let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
+                
+                do {
+                    
+                    var favouritableContacts = [FavouritableContact]()
+                    
+                    try store.enumerateContacts(with: request, usingBlock: { (contact, stopPointerIfYouWantToStopEnumerating) in
+                        
+                        print(contact.givenName)
+                        print(contact.familyName)
+                        print(contact.phoneNumbers.first?.value.stringValue ?? "")
+                        
+                       favouritableContacts.append(FavouritableContact(contact: contact, hasFavourited: false))
+                        
+                    })
+                    
+                    let names = ExpandableNames(isExpanded: true, names: favouritableContacts)
+                    self.nameDimensionalArray = [names]
+                    
+                } catch let err {
+                    print("Failed to enumerate contacts:", err)
+                }
+               
+            } else {
+                print("Access denied")
+            }
+        }
+    }
     
     var showIndexPaths = false
     
@@ -60,6 +104,8 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchContacts()
         
         // Add Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show IndexPath", style: .plain, target: self, action: #selector(handleShowIndexPath))
@@ -134,19 +180,24 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ContactCell
+       // let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ContactCell
+        
+        let cell = ContactCell(style: .subtitle, reuseIdentifier: cellID)
+        
         cell.link = self
         
-        let contact = nameDimensionalArray[indexPath.section].names[indexPath.row]
+        let favouritableContact = nameDimensionalArray[indexPath.section].names[indexPath.row]
         
-        cell.textLabel?.text = contact.name
+        cell.textLabel?.text = favouritableContact.contact.givenName + " " + favouritableContact.contact.familyName
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
-        cell.accessoryView?.tintColor = contact.hasFavourited ? UIColor.red : .lightGray
+        cell.detailTextLabel?.text = favouritableContact.contact.phoneNumbers.first?.value.stringValue
+        
+        cell.accessoryView?.tintColor = favouritableContact.hasFavourited ? UIColor.red : .lightGray
         
         if showIndexPaths {
-            cell.textLabel?.text = "\(contact.name)   Section:\(indexPath.section) Row:\(indexPath.row)"
+            //            cell.textLabel?.text = "\(favouritableContact.name)   Section:\(indexPath.section) Row:\(indexPath.row)"
         }
-        
         return cell
     }
 }

@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E51270B21C2BB8E006B69D0 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E51270B21C2BB8E006B69D0 /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E51270E21C2BB8E006B69D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E51271021C2BB8E006B69D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5E51271321C2BB8E006B69D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		5E51270221C2BB8E006B69D0 = {
 			isa = PBXGroup;
 			children = (
-				5E51270D21C2BB8E006B69D0 /* Contacts */,
+				5E51270D21C2BB8E006B69D0 /* ContactsApp */,
 				5E51270C21C2BB8E006B69D0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,12 +50,12 @@
 		5E51270C21C2BB8E006B69D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E51270B21C2BB8E006B69D0 /* Contacts.app */,
+				5E51270B21C2BB8E006B69D0 /* ContactsApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5E51270D21C2BB8E006B69D0 /* Contacts */ = {
+		5E51270D21C2BB8E006B69D0 /* ContactsApp */ = {
 			isa = PBXGroup;
 			children = (
 				5E51270E21C2BB8E006B69D0 /* AppDelegate.swift */,
@@ -67,15 +67,15 @@
 				5E51271721C2BB8F006B69D0 /* LaunchScreen.storyboard */,
 				5E51271A21C2BB8F006B69D0 /* Info.plist */,
 			);
-			path = Contacts;
+			path = ContactsApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5E51270A21C2BB8E006B69D0 /* Contacts */ = {
+		5E51270A21C2BB8E006B69D0 /* ContactsApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E51271D21C2BB8F006B69D0 /* Build configuration list for PBXNativeTarget "Contacts" */;
+			buildConfigurationList = 5E51271D21C2BB8F006B69D0 /* Build configuration list for PBXNativeTarget "ContactsApp" */;
 			buildPhases = (
 				5E51270721C2BB8E006B69D0 /* Sources */,
 				5E51270821C2BB8E006B69D0 /* Frameworks */,
@@ -85,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = Contacts;
+			name = ContactsApp;
 			productName = Contacts;
-			productReference = 5E51270B21C2BB8E006B69D0 /* Contacts.app */;
+			productReference = 5E51270B21C2BB8E006B69D0 /* ContactsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E51270621C2BB8E006B69D0 /* Build configuration list for PBXProject "Contacts" */;
+			buildConfigurationList = 5E51270621C2BB8E006B69D0 /* Build configuration list for PBXProject "ContactsApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -118,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5E51270A21C2BB8E006B69D0 /* Contacts */,
+				5E51270A21C2BB8E006B69D0 /* ContactsApp */,
 			);
 		};
 /* End PBXProject section */
@@ -292,7 +292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RGB38XGJ2;
-				INFOPLIST_FILE = Contacts/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ContactsApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +310,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RGB38XGJ2;
-				INFOPLIST_FILE = Contacts/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ContactsApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,7 +325,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E51270621C2BB8E006B69D0 /* Build configuration list for PBXProject "Contacts" */ = {
+		5E51270621C2BB8E006B69D0 /* Build configuration list for PBXProject "ContactsApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E51271B21C2BB8F006B69D0 /* Debug */,
@@ -334,7 +334,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5E51271D21C2BB8F006B69D0 /* Build configuration list for PBXNativeTarget "Contacts" */ = {
+		5E51271D21C2BB8F006B69D0 /* Build configuration list for PBXNativeTarget "ContactsApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E51271E21C2BB8F006B69D0 /* Debug */,
